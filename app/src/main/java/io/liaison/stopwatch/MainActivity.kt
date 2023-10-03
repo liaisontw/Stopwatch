@@ -55,8 +55,23 @@ class MainActivity : AppCompatActivity() {
                 offset = 0
                 setBaseTime()
         }
+    }
 
+    override fun onStop () {
+        super.onStop()
+        if (running) {
+            saveOffset()
+            stopwatch.stop()
+        }
+    }
 
+    override fun onRestart () {
+        super.onRestart()
+        if (running) {
+            setBaseTime()
+            stopwatch.start()
+            offset = 0
+        }
     }
 
     override fun onSaveInstanceState(savedInstanceState: Bundle) {
